@@ -1,0 +1,95 @@
+﻿@model SaaS_Database_Architecture.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="sign-up">
+    <h3>Yeni istifadəçi qeydiyyatı</h3>
+    <p class="creating">
+    </p>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+
+        <h5>İstifadəçi məlumatları</h5>
+         <div class="sign-u">
+            <div class="sign-up1">
+                <h4>@Html.LabelFor(m => m.UserName)* :</h4>
+            </div>
+            <div class="sign-up2">
+
+                @Html.TextBoxFor(m => m.UserName, new { @placeholder = "", @required = "" })
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>@Html.LabelFor(m => m.Password)* :</h4>
+            </div>
+            <div class="sign-up2">
+
+                @Html.PasswordFor(m => m.Password, new { @placeholder = "", @required = "" })
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>@Html.LabelFor(m => m.FirstName)* :</h4>
+            </div>
+            <div class="sign-up2">
+
+                @Html.TextBoxFor(m => m.FirstName, new { @placeholder = "", @required = "" })
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>@Html.LabelFor(m => m.LastName)* :</h4>
+            </div>
+            <div class="sign-up2">
+
+                @Html.TextBoxFor(m => m.LastName, new { @placeholder = "", @required = "" })
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>@Html.LabelFor(m => m.Email) :</h4>
+            </div>
+            <div class="sign-up2">
+
+                @Html.TextBoxFor(m => m.Email, new { @placeholder = "", @required = "" })
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>@Html.LabelFor(m => m.WorkPhone) :</h4>
+            </div>
+            <div class="sign-up2">
+
+                @Html.TextBoxFor(m => m.WorkPhone, new { @placeholder = "", @required = "" })
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        
+        <div class="sub_home">
+            <div class="sub_home_left">
+
+                <input type="submit" value="Qeydiyyat" />
+            </div>
+            <div class="sub_home_right">
+                <p>@Html.ActionLink("Ana Səhifə", "Index", "Tenant")-yə qayıt</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    }
+</div>

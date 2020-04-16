@@ -1,0 +1,10 @@
+﻿@model HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+}
+
+<hgroup class="title">
+    <h1 class="error">@Model.Exception.Message</h1>
+    <h2 class="error">Sizin sorğunuzun icrası zamanı xəta baş verdi.</h2>
+</hgroup>

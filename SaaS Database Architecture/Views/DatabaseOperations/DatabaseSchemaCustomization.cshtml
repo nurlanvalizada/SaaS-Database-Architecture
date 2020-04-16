@@ -1,0 +1,106 @@
+﻿@model Dictionary<string, List<Saas_Data_Model.ColumnInformation>>
+@{
+    ViewBag.Title = "VB sxema dəyişiklikləri";
+    var ds = String.Empty;
+    var errorMessage = (string)Session["ErrorMessage"];
+    
+}
+@{
+    ds = Model.Aggregate(ds, (current, entity) => current + "#" + entity.Key + ",");
+}
+
+@using (Html.BeginForm("DatabaseSchemaCustomization", "DatabaseOperations", FormMethod.Post, new { @id = "formApplyField" }))
+{
+    ds = ds.Remove(ds.Length - 1); 
+    
+    <p style="visibility: hidden" id="IDs">@ds</p>
+
+    foreach (var entity in Model)
+    {
+    @Html.Hidden("ReceivedTable")
+    @Html.Hidden("SenderTable")
+    @Html.Hidden("SentColumn")
+
+    <div id="@entity.Key table" style="width: 250px; border-radius: 7px; border: 2px solid gray; float: left; margin-right: 10px;">
+        <h1 style="text-align: center;">@entity.Key</h1>
+
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead style="border: 2px solid gray; background-color: #27cce4;">
+                    <tr>
+                        <th style="border: 2px solid gray; background-color: #27cce4;">Sütun adı</th>
+                    </tr>
+                </thead>
+                <tbody class="listColumns" id="@entity.Key">
+
+                    @foreach (var column in entity.Value)
+                    {
+
+                        <tr style="cursor: pointer;">
+                            <td>@column.Name</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    }
+    if (errorMessage != null)
+    {
+    <p id="errorMessage" style="visibility: hidden;">@errorMessage</p>
+    }
+}
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Məlumat</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="Message"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Bağla</button>
+                </div>
+            </div>
+
+        </div>
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        var idSvalue = $("#IDs").text();
+        $(idSvalue).sortable({
+            connectWith: ".listColumns",
+            receive: function (event, ui) {
+                submitAddedField(this, ui);
+            }
+        }).disableSelection();
+    });
+
+    function submitAddedField(thisItem, ui) {
+        $("#ReceivedTable").val(thisItem.id);
+        $("#SenderTable").val(ui.sender.attr("id"));
+        $("#SentColumn").val(ui.item.text());
+        $("#formApplyField").submit();
+    }
+
+    $(document).ready(function () {
+        // Show the Modal on load
+        var message = $("#errorMessage").text();
+        if (message.length > 10) {
+
+            $("#Message").text(message);
+            $("#myModal").modal("show");
+        }
+    });
+</script>
+

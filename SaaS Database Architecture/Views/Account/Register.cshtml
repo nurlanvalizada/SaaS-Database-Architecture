@@ -1,0 +1,134 @@
+﻿@model SaaS_Database_Architecture.Models.TenantProfile
+@{
+    ViewBag.Title = "Qeydiyyat";
+    Layout = "~/Views/Shared/_AccLayout.cshtml";
+}
+
+<div class="sign-up">
+    <h3>Yeni müştəri qeydiyyatı</h3>
+    <p class="creating"></p>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+
+        <h5>Şəxsi məlumatlar</h5>
+         <div class="sign-u">
+            <div class="sign-up1">
+                <h4>@Html.LabelFor(m => m.TenantName)* :</h4>
+            </div>
+            <div class="sign-up2">
+
+                @Html.TextBoxFor(m => m.TenantName, new { @placeholder = "", @required = "" })
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>@Html.LabelFor(m => m.FirstName)* :</h4>
+            </div>
+            <div class="sign-up2">
+
+                @Html.TextBoxFor(m => m.FirstName, new { @placeholder = "", @required = "" })
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>@Html.LabelFor(m => m.LastName)* :</h4>
+            </div>
+            <div class="sign-up2">
+
+                @Html.TextBoxFor(m => m.LastName, new { @placeholder = "", @required = "" })
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>@Html.LabelFor(m => m.EmailAdress)* :</h4>
+            </div>
+            <div class="sign-up2">
+
+                @Html.TextBoxFor(m => m.EmailAdress, new { @placeholder = "", @required = "" })
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>@Html.LabelFor(m => m.PhoneNumber) :</h4>
+            </div>
+            <div class="sign-up2">
+
+                @Html.TextBoxFor(m => m.PhoneNumber, new { @placeholder = "", @required = "" })
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>@Html.LabelFor(m => m.EmployeeCount) :</h4>
+            </div>
+            <div class="sign-up2">
+
+                @Html.TextBoxFor(m => m.EmployeeCount, new { @placeholder = "", @required = "" })
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <h6>Hesab məlumatları</h6>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>@Html.LabelFor(m => m.UserName)* :</h4>
+            </div>
+            <div class="sign-up2">
+
+                @Html.TextBoxFor(m => m.UserName, new { @placeholder = "", @required = "" })
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="sign-u">
+            <div class="sign-up1">
+                <h4>@Html.LabelFor(m => m.Password)* :</h4>
+            </div>
+            <div class="sign-up2">
+
+                @Html.PasswordFor(m => m.Password, new { @placeholder = "", @required = "" })
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        @*<div class="sign-u">
+            <div class="sign-up1">
+                <h4>@Html.LabelFor(m => m.ConfirmPassword)* :</h4>
+            </div>
+            <div class="sign-up2">
+
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @placeholder = "", @required = "" })
+
+            </div>
+            <div class="clearfix"></div>
+        </div>*@
+        <div class="sub_home">
+            <div class="sub_home_left">
+
+                <input type="submit" value="Qeydiyyat">
+            </div>
+            <div class="sub_home_right">
+                <p>@Html.ActionLink("Ana səhifə", "Index", "Home")-yə qayıt</p>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    }
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+</div>

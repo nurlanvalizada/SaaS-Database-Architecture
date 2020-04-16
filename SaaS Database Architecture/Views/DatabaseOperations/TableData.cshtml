@@ -1,0 +1,73 @@
+﻿@using System.Data
+@{
+    ViewBag.Title = "Cədvəl məlumatları";
+    var model = (DataTable)ViewBag.TableData;
+}
+
+
+<h2><span style="color: #F44336;">@ViewBag.TableName</span> cədvəlindəki məlumatlar</h2>
+<br />
+<h3 style="visibility: hidden;">Cədvəl məlumatları</h3>
+<div class="panel panel-warning" data-widget="{&quot;draggable&quot;: &quot;false&quot;}" data-widget-static="">
+    <div class="panel-body no-padding">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    @{var columnNames = new List<DataColumn>();}
+                    @foreach (DataColumn column in model.Columns)
+                    {
+                        columnNames.Add(column);
+                        <th>@column.ColumnName</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (DataRow row in model.Rows)
+                {
+                    <tr>
+                        @foreach (var item in columnNames)
+                        {
+                            <td>@row[item].ToString()</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<br />
+<br />
+
+<!--<div class="panel panel-warning" data-widget="{&quot;draggable&quot;: &quot;false&quot;}" data-widget-static="">
+    <div class="panel-body no-padding">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    @{var columnNames1 = new List<DataColumn>();}
+                    @foreach (DataColumn column in model.Columns)
+                    {
+                        <th>@column.ColumnName</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+
+                    @foreach (DataColumn column in model.Columns)
+                    {
+                  
+                        <td>
+                            <input class="form-control1" id="focusedinput" placeholder="@column.ColumnName" type="text" name="@column.ColumnName" value="" /></td>
+                    }
+
+                </tr>
+
+
+
+            </tbody>
+
+
+
+        </table>
+    </div>
+</div>-->

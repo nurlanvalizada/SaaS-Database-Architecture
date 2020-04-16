@@ -1,0 +1,127 @@
+﻿@using Saas_Data_Model
+@model IEnumerable<Saas_Data_Model.ColumnInformation>
+
+@{
+    ViewBag.Title = "Cədvəl sxeması";
+}
+
+<h2><span style="color:#F44336;">@ViewBag.TableName</span> cədvəlinin strukturu</h2>
+<br />
+<h3>Paylaşılmış sxema</h3>
+<div class="panel panel-warning" data-widget="{&quot;draggable&quot;: &quot;false&quot;}" data-widget-static="">
+    <div class="panel-body no-padding">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Sütun adı</th>
+                    <th>Sütunun tipi</th>
+                     <th>Null qiymətə icazə</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Name
+                            <input type="hidden" name="columnName" value="@item.Name" /><input type="hidden" name="tableName" value="@ViewBag.TableName" /></td>
+                        <td>@item.DataTypeName</td>
+                         <td>@item.AllowDbNull</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@{
+    var customFields = (List<ColumnInformation>)ViewBag.CustomColumns;
+ }
+<br />
+<h3>Fərdi sxema</h3>
+<div class="panel panel-warning" data-widget="{&quot;draggable&quot;: &quot;false&quot;}" data-widget-static="">
+    <div class="panel-body no-padding">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Sütun adı</th>
+                    <th>Sütunun tipi</th>
+                     <th>Null qiymətə icazə</th>
+                    <th>Əməliyyat</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in customFields)
+                {
+                    using (Html.BeginForm("RemoveColumn", "DatabaseOperations", FormMethod.Post))
+                    { 
+      
+                    <tr>
+                        <td>@item.Name
+                            <input type="hidden" name="columnName" value="@item.Name" /><input type="hidden" name="tableName" value="@ViewBag.TableName" /></td>
+                        <td>@item.DataTypeName</td>
+                        <td>@item.AllowDbNull</td>
+                        <td>
+                            <input type="submit" class="btn btn-danger" value="Remove" />
+
+                        </td>
+                    </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<br />
+<br />
+<button type="button" id="newfield" class="btn btn_5 btn-lg btn-success warning_1">Yeni sütun əlavə et</button>
+<br />
+<br />
+@using (Html.BeginForm("AddNewField", "DatabaseOperations", FormMethod.Post))
+{          
+    <div id="fieldtoadd" class="col-sm-8" style="visibility: hidden">
+        <input type="hidden" name="tableName" value="@ViewBag.TableName"/>
+
+        <input class="form-control1" id="focusedinput" placeholder="Sütun adı" type="text" name="fieldname" value="" /><br />
+        <br />
+        @Html.DropDownList("FieldTypes" ,null,new {@class="form-control1"})
+        <br/>
+        <br/>
+         <input class="form-control1" id="focusedinput" placeholder="Sütun ölçüsü" type="text" name="fieldsize" value="" /><br />
+        <br/>
+         <input class="form-control1" id="focusedinput" placeholder="Susmaya görə qiymət" type="text" name="defaultvalue" value="" /><br />
+        <br/>
+        @Html.CheckBox("Allownull") Null qiymətə icazə ?
+        <br/>
+        <br/>
+        <input class="btn-success btn" type="submit" value="Əlavə Et"/><br/>
+        <br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+    </div>
+}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#newfield").click(function() {
+            $("#fieldtoadd").css("visibility", "visible");
+            $("#newfield").css("visibility", "hidden");
+          //  $("#fieldtoadd").toggle();
+        });
+    });
+
+    //    });
+    //    $('#del').click(function () {
+    //        var table = $(this).closest('table');
+    //        if (table.find('input:text').length > 1) {
+    //            table.find('input:text').last().closest('tr').remove();
+    //        }
+    //    });
+    //});
+</script>

@@ -1,0 +1,112 @@
+﻿@using SaaS_Database_Architecture.Models
+@model SaaS_Database_Architecture.Models.TenantProfile
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1><span style="color:#F44336;">@Model.TenantName</span> müştəri məlumatları</h1>
+
+<div class="bs-example4" data-example-id="contextual-table">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TenantName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmailAdress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </th>
+               @* <th>Actions</th>*@
+            </tr>
+        </thead>
+          <tbody>
+                <tr class="success">
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.TenantName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.EmailAdress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.PhoneNumber)
+                    </td>
+                </tr>
+            </tbody>
+    </table>
+</div>
+@{
+    var userProfiles = (List<UserProfile>)ViewBag.Users;
+}
+<br />
+<br />
+<h1><span style="color:#F44336;">@Model.TenantName</span> müştərisinin istifadəçiləri</h1>
+<div class="bs-example4" data-example-id="contextual-table">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayName("UserName")
+                </th>
+                <th>
+                    @Html.DisplayName("FirstName")
+                </th>
+                <th>
+                    @Html.DisplayName("LastName")
+                </th>
+                <th>
+                    @Html.DisplayName("Email")
+                </th>
+                <th>
+                    @Html.DisplayName("WorkPhone")
+                </th>
+            </tr>
+        </thead>
+
+        @foreach (var item in userProfiles)
+        {
+            <tbody>
+                <tr class="success">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmailAdress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WorkPhone)
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>
+<br />
+<a href="~/Tenant/Create" class="btn btn_5 btn-lg btn-success warning_1">Yeni istifadəçi</a>

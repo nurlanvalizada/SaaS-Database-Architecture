@@ -1,0 +1,38 @@
+﻿@model IEnumerable<string>
+    @{
+        ViewBag.Title = "VB cədvəlləri";
+    }
+    <h1><span style="color: #F44336;">Verilənlər bazası </span>cədvəlləri</h1>
+    <div class="panel panel-warning" data-widget="{&quot;draggable&quot;: &quot;false&quot;}" data-widget-static="">
+        <div class="panel-body no-padding">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Cədvəl adı</th>
+                        <th> Əməliyyat 1</th>
+                        <th>Əməliyyat 2</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var tableName in Model)
+                    {
+                        <tr>
+                            <td><h2>@tableName</h2>
+                            <td>
+                                <a href="~/DatabaseOperations/TableDescription?tableName=@tableName" class="btn btn_5 btn-lg btn-primary">Sxema dəyişiklikləri
+                                </a>
+                            </td>
+                             <td>
+                                <a href="~/DatabaseOperations/TableData?tableName=@tableName" class="btn btn-warning warning_22">Cədvəl məlumatları</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
